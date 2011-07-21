@@ -49,7 +49,7 @@ class ZZDeploy
     sub_commands[:ssh] = Commands::SSHInstance.new
     sub_commands[:multi_ssh] = Commands::MultiSSHInstance.new
     sub_commands[:chef_upload] = Commands::ChefUpload.new
-    sub_commands[:chef_apply] = Commands::ChefBake.new
+    sub_commands[:chef_bake] = Commands::ChefBake.new
     sub_commands[:config_amazon] = Commands::ConfigAmazon.new
   end
 
