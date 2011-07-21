@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+#
+# ./zz - ZZ deploy
+#
+
+require 'rubygems'
+require "bundler/setup"
+$:.unshift(File.expand_path(File.join(File.dirname(__FILE__), "..", "lib")))
+require 'zz_deploy'
+
+exit_code = ZZDeploy.new.run
+exit!(exit_code)
+
+

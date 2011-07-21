@@ -1,0 +1,10 @@
+= zz
+
+Deploy tool for ZangZing and Amazon instances
+
+== Installation
+  $ gem install zzdeploy
+
+== Copyright
+
+Copyright (c) 2011 ZangZing, LLC. See LICENSE for details.
