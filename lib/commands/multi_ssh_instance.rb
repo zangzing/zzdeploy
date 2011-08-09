@@ -19,8 +19,8 @@ module Commands
     end
 
     def register(opts, global_options)
-      opts.banner = "Usage: ssh [options]"
-      opts.description = "SSH into a server"
+      opts.banner = "Usage: multi_ssh [options]"
+      opts.description = "Run a remote command on multiple servers via ssh"
 
       opts.on('-i', "--instances instance1,instance2,etc", Array, "The instance(s) to connect to.") do |v|
         options[:instances] = v

@@ -1,6 +1,6 @@
-source :gemcutter
+source "http://rubygems.org"
 
 gemspec
 
-gem "zzsharedlib", :path => "../zzsharedlib"
+#gem "zzsharedlib", :path => "../zzsharedlib"
 

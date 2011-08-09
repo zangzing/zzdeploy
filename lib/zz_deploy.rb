@@ -12,9 +12,10 @@ class ZZDeploy
   include Subcommands
 
   VERSION = "0.0.4"
-  CMD = "zzdeploy"
+  CMD = "zz"
 
   RECIPES_DIR = "/var/chef/cookbooks/zz-chef-repo"
+  RECIPES_BUNDLE_DIR = "/var/chef/cookbooks/zz-chef-repo_bundle"
 
   # required options
   def required_options
@@ -49,7 +50,7 @@ class ZZDeploy
     sub_commands[:ssh] = Commands::SSHInstance.new
     sub_commands[:multi_ssh] = Commands::MultiSSHInstance.new
     sub_commands[:chef_upload] = Commands::ChefUpload.new
-    sub_commands[:chef_apply] = Commands::ChefBake.new
+    sub_commands[:chef_bake] = Commands::ChefBake.new
     sub_commands[:config_amazon] = Commands::ConfigAmazon.new
   end
 
@@ -171,6 +172,23 @@ class ZZDeploy
     STDOUT.flush
 
     return exit_code
+  end
+
+  def print_actions
+    cmdtext = "Commands are:"
+    @commands.sort.map do |c, opt|
+      #puts "inside opt.call loop"
+      desc = opt.call.description
+      cmdtext << "\n   #{c} : #{desc}"
+    end
+
+    # print aliases
+    unless @aliases.empty?
+      cmdtext << "\n\nAliases: \n"
+      @aliases.each_pair { |name, val| cmdtext << "   #{name} - #{val}\n"  }
+    end
+
+    cmdtext << "\n\nSee '#{CMD} help COMMAND' for more information on a specific command."
   end
 
 end

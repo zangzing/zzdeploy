@@ -18,8 +18,8 @@ module Commands
     end
 
     def register(opts, global_options)
-      opts.banner = "Usage: add [options]"
-      opts.description = "Add a server instance"
+      opts.banner = "Usage: list [options]"
+      opts.description = "List the server instances"
 
       opts.on('-r', "--role role", MetaOptions.roles, "Role to look for.") do |v|
         options[:role] = v

@@ -15,7 +15,7 @@ module Commands
     end
 
     def register(opts, global_options)
-      opts.banner = "Usage: list_deploy_groups [options]"
+      opts.banner = "Usage: deploy_group_list [options]"
       opts.description = "List the deploy groups"
 
     end

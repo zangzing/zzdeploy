@@ -29,7 +29,7 @@ module Commands
     end
 
     def register(opts, global_options)
-      opts.banner = "Usage: create_deploy_group [options]"
+      opts.banner = "Usage: deploy_group_create [options]"
       opts.description = "Create a deploy group"
 
       opts.on('-g', "--group name", "Required - Name of this deploy group.") do |v|

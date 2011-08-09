@@ -27,7 +27,7 @@ module Commands
         options[:instance_size] = v
       end
 
-      opts.on('-z', "--zone availability_zone", MetaOptions.availability_zones, "The amazon availability zone - currently only east coast.") do |v|
+      opts.on('-z', "--zone availability_zone", MetaOptions.availability_zones, "The amazon availability zone - currently we only support the east coast.") do |v|
         options[:availability_zone] = v
       end
 
@@ -35,7 +35,7 @@ module Commands
         options[:role] = v
       end
 
-      opts.on("--start_app","Set if you want to deploy and start the app after instance is ready.") do |v|
+      opts.on("--start_app", "Set if you want to deploy and start the app after instance is ready.") do |v|
         options[:start_app] = v
       end
 
@@ -156,7 +156,7 @@ module Commands
       # do the initial upload step for the chef recipes by fetching the proper tag on the remote machine
       ec2.create_tags(inst_id, {:state => 'ready' })
 
-      git_cmd = "cd #{::ZZDeploy::RECIPES_DIR} && git fetch && git checkout -f #{recipes_deploy_tag} && bundle install"
+      git_cmd = ChefUpload.get_upload_command(recipes_deploy_tag)
       remote_cmd = "#{ssh_cmd} \"#{git_cmd}\""
       result = ZZSharedLib::CL.do_cmd_result remote_cmd
       if result != 0
@@ -179,7 +179,7 @@ module Commands
       # there are dependencies between the instances
       if start_app
         puts "Now deploying all app instances since the configuration changed."
-        BuildDeployConfig.do_app_deploy(utils, amazon, all_instances, group_name, deploy_group, '', false, false, options[:result_path]) if start_app
+        BuildDeployConfig.do_app_deploy(utils, amazon, all_instances, group_name, deploy_group, '', false, false, options[:result_path])
       end
 
     end

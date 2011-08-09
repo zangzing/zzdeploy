@@ -16,7 +16,7 @@ module Commands
     end
 
     def register(opts, global_options)
-      opts.banner = "Usage: delete_deploy_group [options]"
+      opts.banner = "Usage: deploy_group_delete [options]"
       opts.description = "Delete a deploy group"
 
       opts.on('-g', "--group name", "Required - Name of this deploy group.") do |v|

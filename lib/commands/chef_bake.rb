@@ -16,7 +16,7 @@ module Commands
     end
 
     def register(opts, global_options)
-      opts.banner = "Usage: chef_apply [options]"
+      opts.banner = "Usage: chef_bake [options]"
       opts.description = "Apply the chef scripts"
 
       opts.on('-g', "--group name", "Required - Name of this deploy group.") do |v|

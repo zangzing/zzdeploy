@@ -108,7 +108,7 @@ module Commands
       # group changed.  Right now we leave this up to the caller since they may want to do it after
       # deleting more than one instance to avoid multiple redeploys
       puts
-      puts "Since the configuration has changed you should redeploy the application."
+      puts "Since the configuration has changed you should redeploy the configuration and application using chef_bake and deploy."
     end
   end
 end

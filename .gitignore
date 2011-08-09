@@ -24,3 +24,7 @@ pkg
 .idea
 
 ## PROJECT::SPECIFIC
+
+*.gem
+Gemfile.lock
+pkg/*

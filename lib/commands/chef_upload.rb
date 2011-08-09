@@ -50,9 +50,13 @@ module Commands
       deploy_group.save
       deploy_group.reload # save corrupts the in memory state so must reload, kinda lame
 
-      remote_cmd = "cd #{::ZZDeploy::RECIPES_DIR} && git fetch && git checkout -f #{recipes_deploy_tag} && bundle install"
+      remote_cmd = ChefUpload.get_upload_command(recipes_deploy_tag)
       multi = MultiSSH.new(amazon, group_name, deploy_group)
       multi.run(remote_cmd)
+    end
+
+    def self.get_upload_command(recipes_deploy_tag)
+      "cd #{::ZZDeploy::RECIPES_DIR} && git fetch && git checkout -f #{recipes_deploy_tag} && git pull && bundle install --path #{::ZZDeploy::RECIPES_BUNDLE_DIR} --deployment"
     end
   end
 end

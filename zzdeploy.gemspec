@@ -16,18 +16,17 @@ Gem::Specification.new do |s|
   
   s.add_dependency "subcommand", ">= 1.0.0"
   s.add_dependency "right_aws", ">= 1.3.0"
-  s.add_dependency "json", "= 1.5.1"
-  s.add_dependency "net-ssh-multi", ">= 1.0.1"
+  s.add_dependency "json", "= 1.5.2"
+  s.add_dependency "net-ssh-multi", ">= 1.1"
   s.add_dependency "highline", ">= 1.6.2"
-  #s.add_dependency "zzsharedlib", ">= 0.0.1"
+  s.add_dependency "zzsharedlib", ">= 0.0.4"
 
   s.add_development_dependency('rake', '~> 0.9.2')
   s.add_development_dependency('rspec', '~> 2.4')
  
   s.files        = Dir.glob("{lib,bin}/**/*") + %w(Rakefile LICENSE README.rdoc)
   s.test_files = [
-    "spec/spec_helper.rb",
-     "spec/test_spec.rb"
+    "spec/spec_helper.rb"
   ]
   
   s.rdoc_options = ["--charset=UTF-8"]
