@@ -43,18 +43,18 @@ module Commands
       }
 
       # make sure the chef dir exists
+      chef_dir = "/var/chef"
       `sudo mkdir -p #{chef_dir}`
 
       # generate the json into a temp file
       json = JSON.pretty_generate(info)
-      chef_dir = "/var/chef"
       amazon_path = "#{chef_dir}/amazon.json"
       temp_path = File.expand_path('.', "~/amazon_temp.json")
       File.open(temp_path, 'w') {|f| f.write(json) }
 
       # now move the file and set permissions
       `sudo cp #{temp_path} #{amazon_path}`
-      cmd = "sudo chown `whoami`:`whoami` #{amazon_path} && sudo chmod 0644 #{amazon_path}"
+      cmd = "sudo chown `whoami` #{amazon_path} && sudo chmod 0644 #{amazon_path}"
       `#{cmd}`
       # remove the temp file
       `rm -f #{temp_path}`

@@ -56,7 +56,7 @@ module Commands
     end
 
     def self.get_upload_command(recipes_deploy_tag)
-      "cd #{::ZZDeploy::RECIPES_DIR} && git fetch && git checkout -f #{recipes_deploy_tag} && git pull && bundle install --path #{::ZZDeploy::RECIPES_BUNDLE_DIR} --deployment"
+      "cd #{::ZZDeploy::RECIPES_DIR} && git fetch && git checkout -f #{recipes_deploy_tag} && bundle install --path #{::ZZDeploy::RECIPES_BUNDLE_DIR} --deployment"
     end
   end
 end
