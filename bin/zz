@@ -1,11 +1,12 @@
 #!/usr/bin/env ruby
 #
-# ./zz - ZZ deploy
+# zz - ZZ deploy
+# this command is meant to be called after installed as a gem
 #
 
-require 'rubygems'
-require "bundler/setup"
 $:.unshift(File.expand_path(File.join(File.dirname(__FILE__), "..", "lib")))
+require 'rubygems'
+#require "bundler/setup"
 require 'zz_deploy'
 
 exit_code = ZZDeploy.new.run

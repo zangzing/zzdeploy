@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+#
+# ./zzt - ZZ deploy
+# This is the test flavor of the tool meant to be used when
+# testing the code without running as a gem.  This loads bundler/setup
+# to pick up the dependencies, where the plain zz version does not.
+#
+
+$:.unshift(File.expand_path(File.join(File.dirname(__FILE__), "..", "lib")))
+require 'rubygems'
+require "bundler/setup"
+require 'zz_deploy'
+
+exit_code = ZZDeploy.new.run
+exit!(exit_code)
+
+

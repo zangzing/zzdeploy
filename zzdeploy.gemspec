@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rake', '~> 0.9.2')
   s.add_development_dependency('rspec', '~> 2.4')
  
-  s.files        = Dir.glob("{lib,bin}/**/*") + %w(Rakefile LICENSE README.rdoc)
+  s.files        = Dir.glob("{lib}/**/*") + %w(bin/zz Rakefile LICENSE README.rdoc)
   s.test_files = [
     "spec/spec_helper.rb"
   ]

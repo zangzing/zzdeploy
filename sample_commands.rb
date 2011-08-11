@@ -1,5 +1,5 @@
 # create a deploy group
-./bin/zz deploy_group_create --group photos_staging --app_name photos --rails_env photos_staging --vhost hacktest.photos.zangzing.com --email_host hacktest.zangzing.com --app_git_url git@github.com:zangzing/server.git --extra "extra stuff" --amazon_security_key amazon_staging --amazon_security_group security_staging --amazon_image baseline_staging --amazon_elb hacktest-balancer --database_host zz-staging-rds.ckikxby0s3p8.us-east-1.rds.amazonaws.com --database_username zzadmin --database_password share1001photos --database_schema photos_staging --extra_json_file ./config/test_extra.json
+./bin/zz deploy_group_create --group photos_staging --app_name photos --rails_env photos_staging --vhost staging.photos.zangzing.com --email_host staging.zangzing.com --app_git_url git@github.com:zangzing/server.git --extra "extra stuff" --amazon_security_key amazon_staging --amazon_security_group security_staging --amazon_image baseline_staging --amazon_elb staging-balancer --database_host zz-staging-rds.ckikxby0s3p8.us-east-1.rds.amazonaws.com --database_username zzadmin --database_password share1001photos --database_schema photos_staging --extra_json_file ./config/test_extra.json
 
 # list deploy groups
 ./bin/zz deploy_group_list
