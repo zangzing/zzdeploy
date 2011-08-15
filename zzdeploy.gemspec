@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "json", "= 1.5.2"
   s.add_dependency "net-ssh-multi", ">= 1.1"
   s.add_dependency "highline", ">= 1.6.2"
-  s.add_dependency "zzsharedlib", ">= 0.0.4"
+  s.add_dependency "zzsharedlib", ">= 0.0.5"
 
   s.add_development_dependency('rake', '~> 0.9.2')
   s.add_development_dependency('rspec', '~> 2.4')
