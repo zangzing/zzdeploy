@@ -8,6 +8,8 @@ module Commands
     # you can set any initial defaults here
     def options
       @options ||= {
+          :roles => [],
+          :instances => []
       }
     end
 
@@ -26,8 +28,12 @@ module Commands
         options[:instances] = v
       end
 
-      opts.on('-r', "--role role", MetaOptions.roles, "Role to look for.") do |v|
-        options[:role] = v
+      opts.on('-r', "--role role1,role2", Array,  "Roles to use.") do |v|
+        valid_roles = MetaOptions.roles
+        v.each do |r|
+          raise "Not a valid role: #{r}" if !valid_roles.include?(r.to_sym)
+        end
+        options[:roles] = v
       end
 
       opts.on('-g', "--group deploy_group", "Required: Group to look for.") do |v|
@@ -62,16 +68,16 @@ module Commands
       group_config = deploy_group.config
 
       user_instances = options[:instances]
-      if user_instances.nil?
-        instances = amazon.find_and_sort_named_instances(options[:group], options[:role])
-      else
-        instances = []  # build the instances wanted here
-        server_instances = amazon.find_and_sort_named_instances(nil, nil, false)
-        server_instances.each do |server_instance|
-          server_instance_id = server_instance[:resource_id]
-          if user_instances.include?(server_instance_id)
-            instances << server_instance
-          end
+      roles = options[:roles]
+      filters_off = roles.empty? && user_instances.empty?
+      instances = []  # build the instances wanted here
+      server_instances = amazon.find_and_sort_named_instances(options[:group], nil, false)
+      server_instances.each do |server_instance|
+        server_instance_id = server_instance[:resource_id]
+        server_instance_role = server_instance[:role]
+        if filters_off || roles.include?(server_instance_role) || user_instances.include?(server_instance_id)
+          # include this instance in the result set
+          instances << server_instance
         end
       end
 
