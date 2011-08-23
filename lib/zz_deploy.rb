@@ -7,11 +7,11 @@ require 'right_aws'
 require 'sdb/active_sdb'
 require 'json'
 require 'zzsharedlib'
+require 'info'
 
 class ZZDeploy
   include Subcommands
 
-  VERSION = "0.0.4"
   CMD = "zz"
 
   RECIPES_DIR = "/var/chef/cookbooks/zz-chef-repo"
@@ -59,7 +59,7 @@ class ZZDeploy
     set_amazon_options
     # global options
     global_options do |opts|
-      opts.banner = "Version: #{VERSION} - Usage: #{CMD} [options] [subcommand [options]]"
+      opts.banner = "Version: #{Info.version} - Usage: #{CMD} [options] [subcommand [options]]"
       opts.description = "ZangZing configuration and deploy tool.  You must specify a valid sub command."
       opts.separator ""
       opts.separator "Global options are:"

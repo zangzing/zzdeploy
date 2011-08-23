@@ -40,7 +40,7 @@ module Commands
       deploy_group = amazon.find_deploy_group(group_name)
 
       # verify that the tag given is on the remote repo
-      cmd = "git ls-remote --tags git@github.com:zangzing/zz-chef-repo.git refs/tags/#{recipes_deploy_tag} | egrep refs/tags/#{recipes_deploy_tag}"
+      cmd = "git ls-remote --tags git@github.com:zangzing/zz-chef-repo.git refs/tags/#{recipes_deploy_tag}^{} refs/tags/#{recipes_deploy_tag} | egrep refs/tags/#{recipes_deploy_tag}"
       if ZZSharedLib::CL.do_cmd_result(cmd) != 0
         raise "Could not find the tag specified in the remote zz-chef-repo repository.  Make sure you check in and tag your code."
       end

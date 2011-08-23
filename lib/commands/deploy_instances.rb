@@ -72,9 +72,9 @@ module Commands
       full_ref = "refs/heads/#{app_deploy_tag}"
       cmd = "git ls-remote #{gitrepo} #{full_ref} | egrep #{full_ref}"
       if ZZSharedLib::CL.do_cmd_result(cmd) != 0
-        # now try to see if it's a tag
+        # now try to see if it's a tag - use the ^{} to follow tags to find the matching non tag object (i.e. the proper checkin that we tagged)
         full_ref = "refs/tags/#{app_deploy_tag}"
-        cmd = "git ls-remote #{gitrepo} #{full_ref} | egrep #{full_ref}"
+        cmd = "git ls-remote #{gitrepo} #{full_ref}^{} #{full_ref} | egrep #{full_ref}"
         if ZZSharedLib::CL.do_cmd_result(cmd) != 0
           raise "Could not find the tag or ref: #{app_deploy_tag} in the remote #{gitrepo} repository."
         end

@@ -49,9 +49,9 @@ module Commands
       end
 
       # verify that the chef deploy tag exists
-      cmd = "git ls-remote --tags git@github.com:zangzing/zz-chef-repo.git refs/tags/#{recipes_deploy_tag} | egrep refs/tags/#{recipes_deploy_tag}"
+      cmd = "git ls-remote --tags git@github.com:zangzing/zz-chef-repo.git refs/tags/#{recipes_deploy_tag}^{} refs/tags/#{recipes_deploy_tag} | egrep refs/tags/#{recipes_deploy_tag}"
       if ZZSharedLib::CL.do_cmd_result(cmd) != 0
-        raise "Could not find the tag: #{recipes_deploy_tag} in the remote zz-chef-repo repository.  Make sure you check in and tag your code, and run chef_upload."
+        raise "Could not find the remote tag: #{recipes_deploy_tag} in the remote zz-chef-repo repository.  Make sure you check in and tag your code, and run chef_upload."
       end
 
       # tag is good, go ahead and deploy to all the machines in the group
