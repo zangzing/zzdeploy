@@ -145,7 +145,7 @@ module Commands
         break if result == 0
         sleep(6)
         tries += 1
-        if tries >= 20
+        if tries >= 30
           # todo decide if we should terminate this instance
           ec2.create_tags(inst_id, {:state => 'failed_boot' })
           raise "Not able to establish ssh connection, make sure the security group has the ssh port open."
