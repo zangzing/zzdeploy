@@ -49,4 +49,12 @@
 
 
 # sample to prep new group (use your name instead of greg below)
-zz deploy_group_create --group photos_greg --app_name photos --rails_env photos_staging --vhost photos-greg.zangzing.com --email_host mailhost-greg.zangzing.com --app_git_url git@github.com:zangzing/server.git --amazon_security_key amazon_staging --amazon_security_group security_staging --amazon_image baseline_staging --amazon_elb photos-greg-balancer --database_host zz-staging-rds.ckikxby0s3p8.us-east-1.rds.amazonaws.com --database_username zzadmin --database_password pwy4ksp3psd0 --database_schema photos_greg
+(
+cat <<'EOP'
+{
+    "custom_file_path": "photos_photos_greg.json"
+}
+EOP
+) > extra.json
+zz deploy_group_delete --group photos_greg
+zz deploy_group_create --group photos_greg --app_name photos --rails_env photos_staging --vhost photos-greg.zangzing.com --email_host mailhost-greg.zangzing.com --app_git_url git@github.com:zangzing/server.git --amazon_security_key amazon_staging --amazon_security_group security_staging --amazon_image baseline_staging --amazon_elb photos-greg-balancer --database_host zz-staging-rds.ckikxby0s3p8.us-east-1.rds.amazonaws.com --database_username zzadmin --database_password pwy4ksp3psd0 --database_schema photos_greg --extra_json_file extra.json
