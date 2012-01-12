@@ -16,6 +16,8 @@ module Commands
       @required_options ||= Set.new [
           :role,
           :group,
+          :config_access_key,
+          :config_secret_key,
       ]
     end
 
@@ -49,6 +51,14 @@ module Commands
 
       opts.on('-p', "--print path", "The directory into which we output the data as a file per host.") do |v|
         options[:result_path] = v
+      end
+
+      opts.on("--config_akey AmazonAccessKey", "Required - Amazon access key to store on server.") do |v|
+        options[:config_access_key] = v
+      end
+
+      opts.on("--config_skey AmazonSecretKey", "Required - Amazon secret key to store on server.") do |v|
+        options[:config_secret_key] = v
       end
     end
 
@@ -156,6 +166,12 @@ module Commands
       # do the initial upload step for the chef recipes by fetching the proper tag on the remote machine
       ec2.create_tags(inst_id, {:state => 'ready' })
 
+      remote_cmd = "#{ssh_cmd} #{make_amazon_config_command(options[:config_access_key], options[:config_secret_key])}"
+      result = ZZSharedLib::CL.do_cmd_result remote_cmd
+      if result != 0
+        raise "The instance was created but we were unable to upload amazon keys."
+      end
+
       git_cmd = ChefUpload.get_upload_command(recipes_deploy_tag)
       remote_cmd = "#{ssh_cmd} \"#{git_cmd}\""
       result = ZZSharedLib::CL.do_cmd_result remote_cmd
@@ -182,6 +198,23 @@ module Commands
         BuildDeployConfig.do_app_deploy(utils, amazon, all_instances, group_name, deploy_group, '', false, false, options[:result_path])
       end
 
+    end
+
+    # build the command to create the amazon.json file containing the keys passed
+    def make_amazon_config_command(akey, skey)
+      file = "/var/chef/amazon.json"
+      cmd =
+"'sudo rm -f #{file}
+(
+cat <<'EOP'
+{
+  \"aws_access_key_id\": \"#{akey}\",
+  \"aws_secret_access_key\": \"#{skey}\"
+}
+EOP
+) > #{file}
+sudo chown root:root #{file}
+sudo chmod 0644 #{file}'"
     end
   end
 end

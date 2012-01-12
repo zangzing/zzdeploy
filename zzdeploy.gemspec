@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.description               = "Allows configuration and management of rails apps on Amazon EC2 instances"
   
   s.add_dependency "subcommand", ">= 1.0.0"
-  s.add_dependency "right_aws", ">= 1.3.0"
+  s.add_dependency "right_aws", "< 3.0.0"
   s.add_dependency "json", "= 1.5.2"
   s.add_dependency "net-ssh-multi", ">= 1.1"
   s.add_dependency "highline", ">= 1.6.2"
